@@ -1,19 +1,21 @@
 /* The Event class is the superclass for Goal, Task, and Action
  * 
  */
-import java.sql.Time;
-import java.util.Date;
+import java.util.ArrayList;
+import org.joda.time.*;
 
 public class Event {
+	public boolean complete = false;
+	public int id;
 	// What do we want to use to store time?
 	String name = new String();
 	String notes = "";
 	// set of tags
-	Date startDate;
-	Date endDate;
+	LocalDate startDate;
+	LocalDate endDate;
 	
-	public Event() {
-		
+	public Event(int id) {
+		this.id = id;
 	}
 	
 	public void setName(String name)  {
@@ -24,12 +26,17 @@ public class Event {
 		this.notes = notes;
 	}
 	
-	public void setStartDate(Date s) {
+	public void setStartDate(LocalDate s) {
 		this.startDate = s;
 	}
 	
-	public void setEndDate(Date e) {
+	public void setEndDate(LocalDate e) {
 		this.endDate = e;
+	}
+	
+	// sets the completion status of an  event
+	public void setComplete() {
+		complete = true;
 	}
 	
 }

@@ -1,25 +1,22 @@
 /* Action is a small event
  * Action is the only subclass with a non-zero duration
  */
-import java.sql.Time;
-import java.util.Date;
+import org.joda.time.*;
+
 
 public class Action extends Event{
-	Time startTime;
-	Time endTime;
+	DateTime startTime;
+	DateTime endTime;
 	
-	
-	public Action() {
-		
+	public Action(int id) {
+		super(id);
 	}
 	
-	@SuppressWarnings("deprecation")
-	public void setStart(int hour, int  minute, Date s) {
-		this.startTime = new Time(hour, minute, 0);
+	public void setStart(int hour, int  minute, DateTime s) {
+		this.startTime = s;
 	}
 	
-	@SuppressWarnings("deprecation")
-	public void setEnd(int hour, int  minute, Date d) {
-		this.endTime = new Time(hour, minute, 0);
+	public void setEnd(int hour, int  minute, DateTime e) {
+		this.endTime = e;
 	}
 }
