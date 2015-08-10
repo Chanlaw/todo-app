@@ -1,0 +1,6 @@
+-HELP: Display all commands
+-TASK: Create a task
+-GOAL: Create a goal
+-ACTION: Create an action
+-SOON: Display the event with the closest deadline
+

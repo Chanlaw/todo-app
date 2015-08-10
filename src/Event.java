@@ -7,10 +7,8 @@ import org.joda.time.*;
 public class Event {
 	public boolean complete = false;
 	public int id;
-	// What do we want to use to store time?
 	String name = new String();
 	String notes = "";
-	// set of tags
 	LocalDate startDate;
 	LocalDate endDate;
 	
@@ -34,7 +32,7 @@ public class Event {
 		this.endDate = e;
 	}
 	
-	// sets the completion status of an  event
+	// sets the completion status of an event
 	public void setComplete() {
 		complete = true;
 	}
