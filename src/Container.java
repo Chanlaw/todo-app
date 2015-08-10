@@ -77,7 +77,7 @@ public class Container {
 	}
 	
 	// Deletes an event (and potential subevents)
-	public void deleteTask(int id) {
+	public static void deleteTask(int id) {
 		for (Event e : events) {
 			if (e.id == id) {
 			    if (e.getClass().equals(Goal.class)) {
@@ -119,6 +119,7 @@ public class Container {
 		    		addEvent(eventType.TASK, name1, des1);
 		    		System.out.println("Task created.");
 		    		break;
+		    		
 		    	case "GOAL":
 		    		System.out.print("Enter goal name: ");
 		    		String name2 = br.readLine();
@@ -127,6 +128,7 @@ public class Container {
 		    		addEvent(eventType.GOAL, name2, des2);
 		    		System.out.println("Goal created.");
 		    		break;
+		    		
 		    	case "ACTION":
 		    		System.out.print("Enter action name: ");
 		    		String name3 = br.readLine();
@@ -134,6 +136,26 @@ public class Container {
 		    		String des3 = br.readLine();
 		    		addEvent(eventType.ACTION, name3, des3);
 		    		break;
+		    		
+		    	case "DELETE": // Invalid id
+		    		System.out.print("Enter event id: ");
+		    		String id_s1 = br.readLine().trim();
+		    		int id_i1 = Integer.parseInt(id_s1);
+		    		if (ids.contains(id_i1)) {
+		    			deleteTask(id_i1);
+		    		}
+		    		System.out.println("Event deleted.");
+		    		break;
+		    	case "EDIT": // Invalid event id, what field to edit
+		    		System.out.print("Enter event id: ");
+		    		String id_s2 = br.readLine().trim();
+		    		int id_i2 = Integer.parseInt(id_s2);
+		    		if (ids.contains(id_i2)) {
+		    			
+		    		}
+		    		System.out.println("Event edited.");
+		    		break;
+		    		
 		    	case "HELP": 
 		    		try (BufferedReader br2 = new BufferedReader(new FileReader("help.txt"))) {
 		    			   String line = null;
@@ -142,30 +164,47 @@ public class Container {
 		    			   }
 		    			} 
 		    		break;
+		    		
 		    	case "PRINT": 
-		    		printAllEvents();
+		    		System.out.print("Enter \"all\", \"completed\", or \"incompleted\": ");
+		    		String mod = br.readLine().trim().toUpperCase();
+		    		if (mod.equals("ALL")) {
+		    			for (int i : ids) {
+		    				printEvent(i);
+		    			}
+		    		} else if (mod.equals("COMPLETED")) {
+		    			for (int i : ids) {
+		    				if (events.get(i).complete) {
+		    					printEvent(i);
+		    				}
+		    			}
+		    		} else if (mod.equals("INCOMPLETED")) {
+		    			for (int i : ids) {
+		    				if (!events.get(i).complete) {
+		    					printEvent(i);
+		    				}
+		    			}
+		    		} else {
+		    			// Else case
+		    		}
+		    		
 		    		break;
+		    		
 		    	default: 
 		    		System.out.println("ERROR: Command not recognized");
 		    }   
 	    }   
-	}
-	
-	public static void printAllEvents() {
-		for (int i : ids) {
-			printEvent(i);
-		}
+	    
 	}
 	
 	public static void printEvent(int id) {
 		for (Event e : events) {
 			if (e.id == id) {
 				System.out.println("Name: " + e.name + "\nDates: " + 
-									"\nNotes: " + e.notes);
+									"\nNotes: " + e.notes + "\nID: " + e.id);
 			}
 		}
 	}
-	
 	
 	
 }
