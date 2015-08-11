@@ -1,3 +1,4 @@
+package todoapp;
 /* This class contains the management of event, goal, and action creation
  * 
  */
@@ -8,15 +9,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import org.joda.time.LocalDate;
 
-import todoapp.Action;
-import todoapp.Event;
-import todoapp.Goal;
-import todoapp.Task;
-
 public class Container {
 	
-	private static ArrayList<Event> events;
-	private static ArrayList<Integer> ids;
+	private  ArrayList<Event> events;
+	private  ArrayList<Integer> ids;
 	
 	// For simplicity
 	public static enum eventType {
@@ -24,7 +20,7 @@ public class Container {
 	}
 	
 	// Constructor
-	public static void main(String[] args) {
+	public  void main(String[] args) {
 		
 		events  = new ArrayList<Event>();
 		ids = new ArrayList<Integer>();
@@ -39,7 +35,7 @@ public class Container {
 	}
 	
 	// Creates an event when prompted
-	public static int addEvent(eventType t, String name, String notes) {
+	public  int addEvent(eventType t, String name, String notes) {
 		int id = generateId();
 		Event e;
 		switch (t) {
@@ -64,7 +60,7 @@ public class Container {
 	}
 	
 	// Finds an ID currently unused
-	public static int generateId() {
+	public  int generateId() {
 		int i = 1;
 		while (true) {
 			if (!ids.contains(i)) {
@@ -76,7 +72,7 @@ public class Container {
 	}
 	
 	// Deletes an event (and potential subevents)
-	public static void deleteTask(int id) {
+	public  void deleteTask(int id) {
 		for (Event e : events) {
 			if (e.id == id) {
 			    if (e.getClass().equals(Goal.class)) {
@@ -96,7 +92,7 @@ public class Container {
 		ids.remove(id);
 	}
 	
-	private static boolean cancel(String s) {
+	private  boolean cancel(String s) {
 		return s.equals("CANCEL");
 	}
 	

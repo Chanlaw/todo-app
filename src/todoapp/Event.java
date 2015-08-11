@@ -1,3 +1,4 @@
+package todoapp;
 /* The Event class is the superclass for Goal, Task, and Action
  * 
  */
@@ -7,9 +8,9 @@ import org.joda.time.*;
 public class Event {
 	public boolean complete = false;
 	public int id;
-	String name = new String();
-	String notes = "";
-	LocalDate startDate;
+	public String name = new String();
+	public String notes = "";
+	public LocalDate startDate;
 	LocalDate endDate;
 	
 	public Event(int id) {
