@@ -102,7 +102,12 @@ public class Container {
 		String startMessage =  "Welcome to the Todo App.";
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	    System.out.println(startMessage);
-
+	    String controls = "  TASK    Create new task \n" +
+	    				  "  GOAL    Create new goal \n" +
+	    				  "  ACTION  Create new action \n" + 
+	    				  "  DELETE  Delete an event \n" + 
+	    				  "  EDIT    Edit an event \n" +
+	    				  "  HELP    Display commands";
 	    
 	    while(true){
 	    	
@@ -158,12 +163,7 @@ public class Container {
 		    		break;
 		    		
 		    	case "HELP": 
-		    		try (BufferedReader br2 = new BufferedReader(new FileReader("help.txt"))) {
-		    			   String line = null;
-		    			   while ((line = br2.readLine()) != null) {
-		    			       System.out.println(line);
-		    			   }
-		    			} 
+		    		System.out.println(controls);
 		    		break;
 		    		
 		    	case "PRINT": 
