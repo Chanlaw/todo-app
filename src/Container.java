@@ -40,7 +40,7 @@ public class Container {
 	}
 	
 	// Creates an event when prompted
-	public static void addEvent(eventType t, String name, String notes) {
+	public static int addEvent(eventType t, String name, String notes) {
 		int id = generateId();
 		Event e;
 		switch (t) {
@@ -61,6 +61,7 @@ public class Container {
 		e.id = id;
 		events.add(e);
 		ids.add(id);
+		return id;
 	}
 	
 	// Finds an ID currently unused
@@ -102,15 +103,15 @@ public class Container {
 		String startMessage =  "Welcome to the Todo App.";
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	    System.out.println(startMessage);
-	    String controls = "  TASK    Create new task \n" +
-	    				  "  GOAL    Create new goal \n" +
-	    				  "  ACTION  Create new action \n" + 
-	    				  "  DELETE  Delete an event \n" + 
-	    				  "  EDIT    Edit an event \n" +
-	    				  "  HELP    Display commands";
-	    
+	    String controls = "  [T]ASK    Create new task \n" +
+	    				  "  [G]OAL    Create new goal \n" +
+	    				  "  [A]CTION  Create new action \n" + 
+	    				  "  [D]ELETE  Delete an event \n" + 
+	    				  "  [E]DIT    Edit an event \n" +
+	    				  "  [H]ELP    Display commands";
+	    System.out.println(controls + "\n");
 	    while(true){
-	    	
+	    	int id;
 		    System.out.print(">> ");
 		    String cmd = br.readLine();
 		    cmd = cmd.toUpperCase().trim();
@@ -118,32 +119,37 @@ public class Container {
 		    
 		    switch (cmd) {
 		    	case "TASK":
+		    	case "T":
 		    		System.out.print("Enter task name: ");
 					String name1 = br.readLine();
 		    		System.out.print("Enter task description: \n");
 		    		String des1 = br.readLine();
-		    		addEvent(eventType.TASK, name1, des1);
-		    		System.out.println("Task created.");
+		    		id = addEvent(eventType.TASK, name1, des1);
+		    		System.out.println("Task " + name1 + " created with id " + id + ".");
 		    		break;
 		    		
 		    	case "GOAL":
+		    	case "G":
 		    		System.out.print("Enter goal name: ");
 		    		String name2 = br.readLine();
 		    		System.out.print("Enter goal description: ");
 		    		String des2 = br.readLine();
-		    		addEvent(eventType.GOAL, name2, des2);
-		    		System.out.println("Goal created.");
+		    		id = addEvent(eventType.GOAL, name2, des2);
+		    		System.out.println("Goal" + name2 +  "created with id " + id + ".");
 		    		break;
 		    		
 		    	case "ACTION":
+		    	case "A":
 		    		System.out.print("Enter action name: ");
 		    		String name3 = br.readLine();
 		    		System.out.print("Enter action description: ");
 		    		String des3 = br.readLine();
-		    		addEvent(eventType.ACTION, name3, des3);
+		    		id = addEvent(eventType.ACTION, name3, des3);
+		    		System.out.println("Goal" + name3 + "created with id " + id + ".");
 		    		break;
 		    		
-		    	case "DELETE": // Invalid id
+		    	case "DELETE":
+		    	case "D":
 		    		System.out.print("Enter event id: ");
 		    		String id_s1 = br.readLine().trim();
 		    		int id_i1 = Integer.parseInt(id_s1);
@@ -152,28 +158,31 @@ public class Container {
 		    		}
 		    		System.out.println("Event deleted.");
 		    		break;
-		    	case "EDIT": // Invalid event id, what field to edit
+		    	case "EDIT": 
+		    	case "E":// Invalid event id, what field to edit
 		    		System.out.print("Enter event id: ");
 		    		String id_s2 = br.readLine().trim();
 		    		int id_i2 = Integer.parseInt(id_s2);
 		    		if (ids.contains(id_i2)) {
-		    			
+		    			String editMenu = "Edit";
+		    			//TODO write code
+		    			System.out.println("Feature not implemented.");
+		    		}else{
+		    			System.out.println("Invalid ID");
 		    		}
-		    		System.out.println("Event edited.");
+		    		
 		    		break;
 		    		
-		    	case "HELP": 
+		    	case "HELP":
+		    	case "H":
 		    		System.out.println(controls);
 		    		break;
 		    		
 		    	case "PRINT": 
+		    	case "P":
 		    		System.out.print("Enter \"all\", \"completed\", or \"incomplete\": ");
 		    		String mod = br.readLine().trim().toUpperCase();
-		    		if (mod.equals("ALL")) {
-		    			for (int i : ids) {
-		    				printEvent(i);
-		    			}
-		    		} else if (mod.equals("COMPLETED")) {
+		    		if (mod.equals("COMPLETED")) {
 		    			for (int i : ids) {
 		    				if (events.get(i).complete) {
 		    					printEvent(i);
@@ -184,10 +193,14 @@ public class Container {
 		    			for (int i : ids) {
 		    				if (!events.get(i).complete) {
 		    					printEvent(i);
+		    					System.out.println("----");
 		    				}
 		    			}
 		    		} else {
-		    			// Else case
+		    			for (int i : ids) {
+		    				printEvent(i);
+	    					System.out.println("----");
+		    			}
 		    		}
 		    		
 		    		break;
