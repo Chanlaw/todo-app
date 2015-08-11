@@ -102,6 +102,14 @@ public class Container {
 		// create a scanner so we can read the command-line input
 		String startMessage =  "Welcome to the Todo App.";
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	    System.out.println(startMessage);
+	    try (BufferedReader br2 = new BufferedReader(new FileReader("help.txt"))) {
+			   String line = null;
+			   while ((line = br2.readLine()) != null) {
+			       System.out.println(line);
+			   }
+			} 
+	    
 	    
 	    while(true){
 	    	
@@ -166,7 +174,7 @@ public class Container {
 		    		break;
 		    		
 		    	case "PRINT": 
-		    		System.out.print("Enter \"all\", \"completed\", or \"incompleted\": ");
+		    		System.out.print("Enter \"all\", \"completed\", or \"incomplete\": ");
 		    		String mod = br.readLine().trim().toUpperCase();
 		    		if (mod.equals("ALL")) {
 		    			for (int i : ids) {
@@ -176,9 +184,10 @@ public class Container {
 		    			for (int i : ids) {
 		    				if (events.get(i).complete) {
 		    					printEvent(i);
+		    					System.out.println("----");
 		    				}
 		    			}
-		    		} else if (mod.equals("INCOMPLETED")) {
+		    		} else if (mod.equals("INCOMPLETE")) {
 		    			for (int i : ids) {
 		    				if (!events.get(i).complete) {
 		    					printEvent(i);
@@ -195,6 +204,10 @@ public class Container {
 		    }   
 	    }   
 	    
+	}
+	
+	private static boolean cancel(String s) {
+		return s.equals("CANCEL");
 	}
 	
 	public static void printEvent(int id) {
