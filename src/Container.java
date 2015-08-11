@@ -116,36 +116,38 @@ public class Container {
 		    String cmd = br.readLine();
 		    cmd = cmd.toUpperCase().trim();
 		    // System.out.println("Command entered: " + cmd);
+		    String name;
+		    String des;
 		    
 		    switch (cmd) {
 		    	case "TASK":
 		    	case "T":
 		    		System.out.print("Enter task name: ");
-					String name1 = br.readLine();
+					name = br.readLine();
 		    		System.out.print("Enter task description: \n");
-		    		String des1 = br.readLine();
-		    		id = addEvent(eventType.TASK, name1, des1);
-		    		System.out.println("Task " + name1 + " created with id " + id + ".");
+		    		des = br.readLine();
+		    		id = addEvent(eventType.TASK, name, des);
+		    		System.out.println("Task " + name + " created with id " + id + ".");
 		    		break;
 		    		
 		    	case "GOAL":
 		    	case "G":
 		    		System.out.print("Enter goal name: ");
-		    		String name2 = br.readLine();
+		    		name = br.readLine();
 		    		System.out.print("Enter goal description: ");
-		    		String des2 = br.readLine();
-		    		id = addEvent(eventType.GOAL, name2, des2);
-		    		System.out.println("Goal" + name2 +  "created with id " + id + ".");
+		    		des = br.readLine();
+		    		id = addEvent(eventType.GOAL, name, des);
+		    		System.out.println("Goal" + name +  "created with id " + id + ".");
 		    		break;
 		    		
 		    	case "ACTION":
 		    	case "A":
 		    		System.out.print("Enter action name: ");
-		    		String name3 = br.readLine();
+		    		name = br.readLine();
 		    		System.out.print("Enter action description: ");
-		    		String des3 = br.readLine();
-		    		id = addEvent(eventType.ACTION, name3, des3);
-		    		System.out.println("Goal" + name3 + "created with id " + id + ".");
+		    		des = br.readLine();
+		    		id = addEvent(eventType.ACTION, name, des);
+		    		System.out.println("Goal" + name + "created with id " + id + ".");
 		    		break;
 		    		
 		    	case "DELETE":
