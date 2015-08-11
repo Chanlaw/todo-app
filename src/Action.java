@@ -9,8 +9,8 @@ public class Action extends Event{
 	Time endTime;
 	
 	
-	public Action() {
-		
+	public Action(int id) {
+		super(id);
 	}
 	
 	@SuppressWarnings("deprecation")

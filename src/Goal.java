@@ -4,7 +4,7 @@
 import java.util.Date;
 
 public class Goal extends Event {
-	public Goal() {
-		
+	public Goal(int id) {
+		super(id);
 	}
 }
