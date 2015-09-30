@@ -1,0 +1,40 @@
+{
+  "name": "Make Todo App",
+  "task_id": 293,
+  "time_created": "2015-09-29T17:17:58+08:00",
+  "time_due": "2015-10-29T17:17:58+8:00",
+  "time_required": 144000,
+  "time_spent": 7200,
+  "time_completed": "",
+  "benefit": 60,
+  "edits": [
+    { "time_edited": "2015-09-29T17:17:58+08:00", "time_due": "2015-10-29T17:17:58+8:00" , "time_completed": "", "time_required": 36000},
+    { "time_edited": "2015-09-29T17:32:58+08:00", "time_due": "2015-10-20T17:17:58+8:00" , "time_completed": "", "time_required": 144000}
+  ],
+  "description": "Make a todo-app that I actually want to use.",
+  "goal": "Programming",
+  "goal_id": 3,
+  "actions": [
+    { "action_id":  14, "name": "make mongodb", "time_required": 18000}
+  ]
+}
+
+{
+  "name": "Find a Professor to Do Research With",
+  "task_id": 219,
+  "time_created": "2015-09-29T17:17:58+08:00",
+  "time_due": "2015-10-05T17:17:58+8:00",
+  "time_required": 36000,
+  "time_spent": 600,
+  "time_completed": "",
+  "benefit": 60,
+  "edits": [
+    { "time_edited": "2015-09-29T17:17:58+08:00", "time_due": "2015-10-29T17:17:58+8:00" , "time_completed": "", "time_required": 36000}
+  ],
+  "description": "Find a professor to do research with",
+  "goal": "Research",
+  "goal_id": 5,
+  "actions": [
+    { "action_id":  18, "name": "email professors", "time_required": 10800}
+  ]
+}
