@@ -3,6 +3,7 @@
         {
             "name": "Make Todo App",
             "task_id": 293,
+            "completed" : false,
             "time_created": "2015-09-29T17:17:58+08:00",
             "time_due": "2015-10-29T17:17:58+8:00",
             "time_required": 144000,
@@ -37,6 +38,7 @@
         {
             "name": "Find a Professor to Do Research With",
             "task_id": 219,
+            "completed" : false,
             "time_created": "2015-09-29T17:17:58+08:00",
             "time_due": "2015-10-05T17:17:58+8:00",
             "time_required": 36000,
