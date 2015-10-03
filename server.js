@@ -81,7 +81,6 @@
 
     });
 
-    // delete a todo
     app.delete('/api/todos/:todo_id', function(req, res) {
         Task.remove({
             _id : req.params.todo_id
