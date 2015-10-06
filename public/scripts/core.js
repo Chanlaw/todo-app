@@ -1,5 +1,9 @@
 // public/core.js
-var app = angular.module('scotchTodo', []);
+var app = angular.module('todo', ["xeditable", "ui.bootstrap", 'ngMdIcons']);
+
+app.run(function(editableOptions) {
+    editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+});
 
 app.controller('mainController', function($scope, $http) {
     var coeff = 1000*60*5;
@@ -15,20 +19,23 @@ app.controller('mainController', function($scope, $http) {
     $http.get('/api/todos')
         .success(function(data) {
             $scope.todos = data;
-            console.log(data);
         })
         .error(function(data) {
             console.log('Error: ' + data);
         });
 
-    // when submitting the add form, send the text to the node API
+    // when submitting the add form, send the data to the node API
     $scope.createTodo = function() {
         $http.post('/api/todos', $scope.formData)
             .success(function(data) {
-                $scope.formData = {text : "",
-                time : new Date()}; // clear the form so our user is ready to enter another
+                //reset the form so user can enter another task
+                date = new Date();
+                rounded = new Date(Math.ceil(date.getTime() / coeff) * coeff)
+                $scope.formData = {
+                    text : "",
+                    time : rounded
+                };
                 $scope.todos = data; 
-                console.log(data);
             })
             .error(function(data) {
                 console.log('Error: ' + data);
@@ -40,7 +47,18 @@ app.controller('mainController', function($scope, $http) {
         $http.delete('/api/todos/' + id)
             .success(function(data) {
                 $scope.todos = data;
-                console.log(data);
+            })
+            .error(function(data) {
+                console.log('Error: ' + data);
+            });
+    };
+
+
+    //update a todo
+    $scope.updateTodo = function(id, update){
+        $http.put('/api/todos/' + id, update)
+            .success(function(data) {
+                $scope.todos = data;
             })
             .error(function(data) {
                 console.log('Error: ' + data);

@@ -1,0 +1,57 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a:link { text-decoration: none;}
+        a:hover { text-decoration: none;}
+        a:visited { text-decoration: none;}
+        a:active {text-decoration: none;}
+        html                    { overflow-y:scroll; }
+        body                    { padding-top:50px; }
+        #todo-list              { margin-bottom:30px; }
+        #todo-list table {
+
+        }
+        #todo-form .stuff  {display: inline-block;
+            .margin-left: 0px;
+            .padding-left: 5px;}
+
+.editable-click{
+	color: black;
+	border-bottom: none;
+}
+
+.editable-bstime .editable-input i.icon-chevron-up:before {
+  content: '\e113';
+}
+.editable-bstime .editable-input i.icon-chevron-down:before {
+  content: '\e114';
+}
+.editable-bstime .editable-input i.icon-chevron-up,
+.editable-bstime .editable-input i.icon-chevron-down {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+}
+
+table{
+    table-layout: fixed;
+}
+
+#completed{
+	width: 12%;
+}
+
+#options {
+	width: 40px;
+}
+
+#options:hover{
+	style:"fill:pink";
+}

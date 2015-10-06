@@ -67,7 +67,7 @@
             name : req.body.text,
             completed : false,
             time_created : date.toJSON(),
-            time_due : req.body.time
+            time_due : req.body.time,
         }, function(err, todo) {
             if (err)
                 {res.send(err);}
@@ -83,13 +83,28 @@
     });
 
     app.delete('/api/todos/:todo_id', function(req, res) {
+        Task.remove({
+            _id : req.params.todo_id
+        }, 
+            function(err, todo) {
+                if (err)
+                    {res.send(err);}
+        
+            // get and return all the todos after you create another
+            Task.find(function(err, todos) {
+                if (err)
+                    {res.send(err);}
+                res.json(todos);
+            });
+        });
+    });
+
+    app.put('/api/todos/:todo_id', function(req, res) {
+        console.log(req.body);
         Task.update({
             _id : req.params.todo_id
         },
-        { completed : true }, {},
-        /*Task.remove({
-            _id : req.params.todo_id
-        }, */
+        req.body, {},
             function(err, todo) {
                 if (err)
                     {res.send(err);}
