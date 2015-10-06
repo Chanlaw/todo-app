@@ -13,6 +13,10 @@
     <!-- SCROLLS -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
     <style>
+        a:link { text-decoration: none;}
+        a:hover { text-decoration: none;}
+        a:visited { text-decoration: none;}
+        a:active {text-decoration: none;}
         html                    { overflow-y:scroll; }
         body                    { padding-top:50px; }
         #todo-list              { margin-bottom:30px; }
@@ -27,7 +31,7 @@
 
     <!-- SPELLS -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
     <script src="core.js"></script>
 
 </head>
@@ -37,7 +41,8 @@
 
         <!-- HEADER AND TODO COUNT -->
         <div class="jumbotron text-center">
-            <h1>Really Quick Todo List <span class="label label-info">{{ todos.length }}</span></h1>
+            <h1>Really Quick Todo List <span class="label label-info">{{ (todos | filter:false).length }}</span></h1>
+            <h2 >Completed Today <a unselectable="on" href=""><span class="label label-info">{{ (todos | filter:true).length }}</span></a></h2>
         </div>
 
         <!-- TODO LIST -->
@@ -50,13 +55,13 @@
                         <th>Time Created</th>
                         <th>Time Due</th>
                     </tr>
-                    <!-- LOOP OVER THE TODOS IN $scope.todos -->
+                    
                     <tr ng-repeat="todo in todos | filter:false | orderBy:'time_due'">
                         <label>
                             <td> <input type="checkbox" ng-click="deleteTodo(todo._id)"> </td> 
                             <td> {{ todo.name }} </td> 
-                            <td> {{ todo.time_created}} </td>
-                            <td> {{ todo.time_due }} </td>
+                            <td> {{ todo.time_created | date:'hh:mm a'}} </td>
+                            <td> {{ todo.time_due | date:'hh:mm a'}}  </td>
                         </label>
                     </tr>
                 </table>
@@ -67,9 +72,21 @@
         <div id="todo-form" class="row">
             <div class=" text-center">
                 <form>
-                    <div class="col-sm-8 col-sm-offset-1 stuff form-group">
+                    <div class="col-sm-6 col-sm-offset-1 stuff form-group">
 
                         <input type="text" class="form-control input-lg text-center" placeholder="Write up my Todos!" ng-model="formData.text">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <form name="myForm">
+                           <input type="time" id="exampleInput" name="input" placeholder="HH:mm" ng-model="formData.time"
+                               />
+                           <div role="alert">
+                             <span class="error" ng-show="myForm.input.$error.time">
+                                 Not a valid date!</span>
+                           </div>
+                           <tt>Time Due</tt><br/>
+                        </form>
                     </div>
 
                     <button type="submit" class="col-sm-2 stuff btn btn-primary btn-lg" ng-click="createTodo()">Add</button>

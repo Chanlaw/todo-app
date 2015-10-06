@@ -1,8 +1,15 @@
 // public/core.js
-var scotchTodo = angular.module('scotchTodo', []);
+var app = angular.module('scotchTodo', []);
 
-function mainController($scope, $http) {
-    $scope.formData = {};
+app.controller('mainController', function($scope, $http) {
+    var coeff = 1000*60*5;
+    var date = new Date();  
+    var rounded = new Date(Math.ceil(date.getTime() / coeff) * coeff)
+    $scope.formData = {
+        text : "",
+        time : rounded
+    };
+    
 
     // when landing on the page, get all todos and show them
     $http.get('/api/todos')
@@ -18,8 +25,9 @@ function mainController($scope, $http) {
     $scope.createTodo = function() {
         $http.post('/api/todos', $scope.formData)
             .success(function(data) {
-                $scope.formData = {}; // clear the form so our user is ready to enter another
-                $scope.todos = data;
+                $scope.formData = {text : "",
+                time : new Date()}; // clear the form so our user is ready to enter another
+                $scope.todos = data; 
                 console.log(data);
             })
             .error(function(data) {
@@ -38,4 +46,4 @@ function mainController($scope, $http) {
                 console.log('Error: ' + data);
             });
     };
-};
+});

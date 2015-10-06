@@ -28,14 +28,14 @@
         time_required : Number,
         time_spent : Number,
         time_completed : Number,
-        benefit : Number,
+        benewfit : Number,
         description : String,
         goal_id : Number
     });
 
     // application -------------------------------------------------------------
     app.get('/api/', function(req, res) {
-        res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+        res.sendfile('./public/index.html'); // load the single view file
     });
     
     // listen (start app with node server.js) ======================================
@@ -66,7 +66,8 @@
         Task.create({
             name : req.body.text,
             completed : false,
-            time_created : date.toJSON()
+            time_created : date.toJSON(),
+            time_due : req.body.time
         }, function(err, todo) {
             if (err)
                 {res.send(err);}
@@ -82,12 +83,17 @@
     });
 
     app.delete('/api/todos/:todo_id', function(req, res) {
-        Task.remove({
+        Task.update({
             _id : req.params.todo_id
-        }, function(err, todo) {
-            if (err)
-                {res.send(err);}
-
+        },
+        { completed : true }, {},
+        /*Task.remove({
+            _id : req.params.todo_id
+        }, */
+            function(err, todo) {
+                if (err)
+                    {res.send(err);}
+        
             // get and return all the todos after you create another
             Task.find(function(err, todos) {
                 if (err)
