@@ -1,12 +1,16 @@
-// public/core.js
-var app = angular.module('todo', ["xeditable", "ui.bootstrap", 'ngMdIcons']);
+"use strict";
+var app = angular.module('todo', ["xeditable", "ngRoute", "ui.bootstrap", 'ngMdIcons']);
+
+app.config(["$routeProvider", function($routeProvider){
+
+}]);
 
 app.run(function(editableOptions) {
     editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 });
 
 app.controller('mainController', function($scope, $http) {
-    var coeff = 1000*60*5;
+    var coeff = 1000*60*5; //nearest time interval to round to
     var date = new Date();  
     var rounded = new Date(Math.ceil(date.getTime() / coeff) * coeff)
     $scope.formData = {
@@ -29,12 +33,7 @@ app.controller('mainController', function($scope, $http) {
         $http.post('/api/todos', $scope.formData)
             .success(function(data) {
                 //reset the form so user can enter another task
-                date = new Date();
-                rounded = new Date(Math.ceil(date.getTime() / coeff) * coeff)
-                $scope.formData = {
-                    text : "",
-                    time : rounded
-                };
+                $scope.formData.text = "",
                 $scope.todos = data; 
             })
             .error(function(data) {
