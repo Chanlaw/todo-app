@@ -27,7 +27,7 @@
         time_due : String,
         time_required : Number,
         time_spent : Number,
-        time_completed : Number,
+        time_completed : String,
         benewfit : Number,
         description : String,
         goal_id : Number
@@ -85,6 +85,23 @@
     app.delete('/api/todos/:todo_id', function(req, res) {
         Task.remove({
             _id : req.params.todo_id
+        }, 
+            function(err, todo) {
+                if (err)
+                    {res.send(err);}
+        
+            // get and return all the todos after you create another
+            Task.find(function(err, todos) {
+                if (err)
+                    {res.send(err);}
+                res.json(todos);
+            });
+        });
+    });
+
+    app.delete('/api/delete-past', function(req, res) {
+        Task.remove({
+            completed: true,
         }, 
             function(err, todo) {
                 if (err)

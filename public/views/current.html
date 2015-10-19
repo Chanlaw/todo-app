@@ -1,0 +1,49 @@
+<!-- TODO LIST -->
+        <div id="todo-list" class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+                <table class="table table-hover">
+                    <tr>
+                        <th id="completed"></th>
+                        <th>Task</th>
+                        <th>Time Created</th>
+                        <th>Time Due</th>
+                        <th id="options"></th>
+                    </tr>
+                    
+                    <tr ng-repeat="todo in todos | filter:false | orderBy:'time_due'">
+                        <label> 
+                            <td> <input type="checkbox" ng-click="completeTodo(todo._id, { completed: true})"> </td> 
+                            <td> <span editable-text="todo.name" buttons="no" onaftersave="updateTodo(todo._id, { name : todo.name})">{{ todo.name }} </span> </td>
+                            <td> {{ todo.time_created | date:'hh:mm a'}} </td>
+                            <td> <span editable-bstime="todo.time_due" onaftersave="updateTodo(todo._id, { time_due : todo.time_due})">{{ todo.time_due | date:'hh:mm a'}}  </span> </td>
+                            <td id="options"> <a href="" ng-click="deleteTodo(todo._id)"><ng-md-icon icon="highlight_remove" style="fill: grey"></ng-md-icon></a> </td>
+                        </label>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- FORM TO CREATE TODOS -->
+        <div id="todo-form" class="row">
+            <div class=" text-center">
+                <form>
+                    <div class="col-sm-6 col-sm-offset-1 stuff form-group">
+
+                        <input type="text" class="form-control input-lg text-center" placeholder="Enter a New Todo!" ng-model="formData.text">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <form name="myForm">
+                           <input type="time" name="input" placeholder="HH:mm" ng-model="formData.time"/>
+                           <div role="alert">
+                             <span class="error" ng-show="myForm.input.$error.time">
+                                 Not a valid time!</span>
+                           </div>
+                           <tt>Time Due</tt><br/>
+                        </form>
+                    </div>
+
+                    <button type="submit" class="col-sm-2 stuff btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+                </form>
+            </div>
+        </div>
