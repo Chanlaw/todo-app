@@ -3,12 +3,12 @@
 
 <!-- ASSIGN OUR ANGULAR MODULE -->
 <html ng-app="todo">
-<head>
+<head ng-controller="mainController">
     <!-- META -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
 
-    <title>Really Simple Todo App</title>
+    <title>Todo list ({{ (todos | filter:false).length }})</title>
 
     <!-- SCROLLS -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
