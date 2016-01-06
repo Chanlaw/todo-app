@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 
 <!-- ASSIGN OUR ANGULAR MODULE -->
-<html ng-app="todo">
-<head ng-controller="mainController">
+<html ng-app="todo" ng-controller="mainController">
+<head>
     <!-- META -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
@@ -26,12 +26,12 @@
 
 
 </head>
-<body ng-controller="mainController">
+<body>
     <div class="container">
 
         <!-- HEADER AND TODO COUNT -->
         <div class="jumbotron text-center">
-            <h1>Really Quick Todo List <a href="/#/"><span class="label label-info">{{ (todos | filter:false).length }}</span> </a></h1>
+            <h1>Todos for Today <a href="/#/"><span class="label label-info">{{ (todos | filter:false).length }}</span> </a></h1>
             <h2 >Completed <a href="/#/past"><span class="label label-info">{{ (todos | filter:true).length }}</span></a></h2>
         </div>
 
