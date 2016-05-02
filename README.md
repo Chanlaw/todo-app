@@ -1,1 +1,1 @@
-Testing out ideas with a new todo-list
+Testing out ideas with a simple todolist app. 
